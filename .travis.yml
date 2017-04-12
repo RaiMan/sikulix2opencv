@@ -8,7 +8,7 @@ env:
   - secure: 5EdDV8AH7rOO2qng7kYbIXRa+e9vm7fJ1qO2Ej1XPcQJ2jiqKWm5n62VF2ubf9kB7uQelPg3+ApqiAtTxd7f2wnqseDgubhl/62yfRnCtopGV/5ZJJhHj4+dRcKuSEqBk9q9YRJanNWthhfm6jVlR5G+JbDjBXZTbKysqKEAsJHp+igsIbjo9/FSgvu6V8X4vH5fFAJsUcroW7JFy+6H6lkExb/eJQRzQ0lxnjP2NLrHFBc0u7Ov1OC/19nMeI4XdleEVcvPD2rrn7ItjuBkbBdQRyiQkEFImrC7RUULx2ZAy8WDyHCcvaU2KeeM5akjOWJcLMGe8C+woyJlqvpt5KwEx3AykNKNQAmYuhe0ia79zvbTwO7ria1f0BkFUQimeKZHhY2R2NPfb12fTOJ/APZgjHKVP6yE4fwIS//Gg9bh4wBDs8ZP3NCigOwCfGlsBC0Ab2I6S7OOR9hTNiKmcWAEHmeED5y8dJQW98546cCEQnXSp/UXZYOl+G/vY3GRrN4k+0BUTxTXxFUiv/uxwFlX1DI/dhR1R/dPvGulM0b5rApefKfbqD9s2irQLKd1kon7yIlpNhSa5lq6JOhzulmmrvAZJDTdSWYGutDRWaks6t76tPwr2uYZIpGeW7s+qRguAUKR7ryo7EQhIwf5c/JskHDylROWvzEAfK19xYM=
 before_install:
 - openssl aes-256-cbc -K $encrypted_dc48ef620fc5_key -iv $encrypted_dc48ef620fc5_iv
-  -in codesigning/codesigning.asc.enc -out ~\/SikuliX/SX2/Maven/travis_deploy/codesigning.asc
+  -in codesigning/codesigning.asc.enc -out codesigning/codesigning.asc
   -d
 before_script:
  - gpg --fast-import codesigning/codesigning.asc
