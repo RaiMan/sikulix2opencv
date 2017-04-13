@@ -4,14 +4,14 @@
                       http://maven.apache.org/xsd/settings-1.0.0.xsd">
   <servers>
     <server>
-      <id>sikulix.deploy.snapshot</id>
+      <id>ossrh</id>
       <username>${env.OSSRH_USER}</username>
       <password>${env.OSSRH_PASS</password>
     </server>
   </servers>
   <profiles>
     <profile>
-      <id>sikulix.deploy.snapshot</id>
+      <id>gpg</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
