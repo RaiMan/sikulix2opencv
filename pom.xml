@@ -57,6 +57,9 @@
   <profiles>
     <profile>
       <id>sign</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
       <build>
         <plugins>
           <plugin>
@@ -79,7 +82,7 @@
     <profile>
       <id>build-extras</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <build>
         <plugins>
