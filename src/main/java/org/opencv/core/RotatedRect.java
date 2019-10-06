@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2017 - sikulix.com - MIT license
- */
-
 package org.opencv.core;
 
 //javadoc:RotatedRect_
@@ -37,7 +33,7 @@ public class RotatedRect {
             angle = vals.length > 4 ? (double) vals[4] : 0;
         } else {
             center.x = 0;
-            center.x = 0;
+            center.y = 0;
             size.width = 0;
             size.height = 0;
             angle = 0;

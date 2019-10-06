@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2017 - sikulix.com - MIT license
- */
-
 package org.opencv.core;
 
 //javadoc:Size_
@@ -39,6 +35,10 @@ public class Size {
 
     public double area() {
         return width * height;
+    }
+
+    public boolean empty() {
+        return width <= 0 || height <= 0;
     }
 
     public Size clone() {

@@ -1,10 +1,4 @@
-/*
- * Copyright (c) 2017 - sikulix.com - MIT license
- */
-
 package org.opencv.imgproc;
-
-import java.lang.Math;
 
 //javadoc:Moments
 public class Moments {
