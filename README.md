@@ -1,7 +1,7 @@
 # Sikulix2opencv [![Build Status](https://travis-ci.org/RaiMan/Sikulix2opencv.svg?branch=master)](https://travis-ci.org/RaiMan/Sikulix2opencv)
 
-special setup of OpenCV to be used in SikuliX2
+special setup of OpenCV to be used in SikuliX
 
-Contains the OpenCV Java API 3.2 and the according prebuilt 64-bit libraries for Windows, Mac and Ubuntu.
+Contains the OpenCV Java API and the according prebuilt 64-bit libraries for Windows.
 
-For other Linux flavours a workflow to get the native libraries ready is missing currently.
+[For Mac and Linux look here](https://github.com/RaiMan/SikuliX1/wiki/macOS-Linux:-Support-Libraries-for-OpenCV-4)
