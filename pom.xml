@@ -10,7 +10,7 @@
 
   <groupId>com.sikulix</groupId>
   <artifactId>sikulix2opencv</artifactId>
-  <version>1.1.4-SNAPSHOT</version>
+  <version>4.1.1</version>
 
   <packaging>jar</packaging>
 
@@ -55,6 +55,41 @@
   </distributionManagement>
 
   <profiles>
+    <!-- complete-jar -->
+    <profile>
+      <id>complete-jar</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.1.1</version>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>org.sikuli.script.Sikulix</mainClass>
+                </manifest>
+              </archive>
+              <descriptors>
+                <descriptor>makeapi.xml</descriptor>
+              </descriptors>
+            </configuration>
+            <executions>
+              <execution>
+                <id>make-assembly</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- sign -->
     <profile>
       <id>sign</id>
       <activation>
@@ -79,8 +114,9 @@
         </plugins>
       </build>
     </profile>
+    <!-- build-source -->
     <profile>
-      <id>build-extras</id>
+      <id>build-source</id>
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
@@ -89,7 +125,10 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
-            <version>2.4</version>
+            <version>3.1.0</version>
+            <configuration>
+              <excludeResources>true</excludeResources>
+            </configuration>
             <executions>
               <execution>
                 <id>attach-sources</id>
@@ -99,10 +138,31 @@
               </execution>
             </executions>
           </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- build-docs -->
+    <profile>
+      <id>build-docs</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
-            <version>2.10.3</version>
+            <version>3.1.1</version>
+            <configuration>
+              <use>false</use>
+              <source>1.8</source>
+              <excludePackageNames>
+                org.opencv:jxgrabkey:com.tulskiy.keymaster:se.vidstige.jadb
+              </excludePackageNames>
+              <!--          needed when run inside Intellij IDEA
+                            <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+              -->
+            </configuration>
             <executions>
               <execution>
                 <id>attach-javadocs</id>
@@ -111,6 +171,28 @@
                 </goals>
               </execution>
             </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- maven-release -->
+    <profile>
+      <id>maven-release</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.8</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>false</autoReleaseAfterClose>
+            </configuration>
           </plugin>
         </plugins>
       </build>
