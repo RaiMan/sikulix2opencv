@@ -10,7 +10,7 @@
 
   <groupId>com.sikulix</groupId>
   <artifactId>sikulix2opencv</artifactId>
-  <version>4.1.1</version>
+  <version>4.5.4</version>
 
   <packaging>jar</packaging>
 
@@ -69,11 +69,11 @@
             <configuration>
               <archive>
                 <manifest>
-                  <mainClass>org.sikuli.script.Sikulix</mainClass>
+                  <mainClass>com.sikulix.opencv.Sikulix</mainClass>
                 </manifest>
               </archive>
               <descriptors>
-                <descriptor>makeapi.xml</descriptor>
+                <descriptor>makecomplete.xml</descriptor>
               </descriptors>
             </configuration>
             <executions>
