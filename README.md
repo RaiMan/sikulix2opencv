@@ -2,6 +2,6 @@
 
 special setup of OpenCV to be used in SikuliX
 
-Contains the OpenCV Java API and the according prebuilt 64-bit libraries for Windows.
+Contains the OpenCV Java API and the according prebuilt 64-bit libraries for macOS and Windows.
 
-[For Mac and Linux look here](https://github.com/RaiMan/SikuliX1/wiki/macOS-Linux:-Support-Libraries-for-OpenCV-4)
+[For Linux look here](https://github.com/RaiMan/SikuliX1/wiki/macOS-Linux:-Support-Libraries-for-OpenCV-4)
