@@ -14,20 +14,20 @@ import org.opencv.utils.Converters;
 
 public class Objdetect {
 
-    // C++: enum ObjectStatus
-    public static final int
-            DetectionBasedTracker_DETECTED_NOT_SHOWN_YET = 0,
-            DetectionBasedTracker_DETECTED = 1,
-            DetectionBasedTracker_DETECTED_TEMPORARY_LOST = 2,
-            DetectionBasedTracker_WRONG_OBJECT = 3;
-
-
     // C++: enum <unnamed>
     public static final int
             CASCADE_DO_CANNY_PRUNING = 1,
             CASCADE_SCALE_IMAGE = 2,
             CASCADE_FIND_BIGGEST_OBJECT = 4,
             CASCADE_DO_ROUGH_SEARCH = 8;
+
+
+    // C++: enum ObjectStatus (cv.DetectionBasedTracker.ObjectStatus)
+    public static final int
+            DetectionBasedTracker_DETECTED_NOT_SHOWN_YET = 0,
+            DetectionBasedTracker_DETECTED = 1,
+            DetectionBasedTracker_DETECTED_TEMPORARY_LOST = 2,
+            DetectionBasedTracker_WRONG_OBJECT = 3;
 
 
     //

@@ -17,27 +17,18 @@ public class AgastFeatureDetector extends Feature2D {
     // internal usage only
     public static AgastFeatureDetector __fromPtr__(long addr) { return new AgastFeatureDetector(addr); }
 
-    // C++: enum DetectorType
-    public static final int
-            AGAST_5_8 = 0,
-            AGAST_7_12d = 1,
-            AGAST_7_12s = 2,
-            OAST_9_16 = 3;
-
-
     // C++: enum <unnamed>
     public static final int
             THRESHOLD = 10000,
             NONMAX_SUPPRESSION = 10001;
 
 
-    //
-    // C++:  AgastFeatureDetector_DetectorType cv::AgastFeatureDetector::getType()
-    //
-
-    public int getType() {
-        return getType_0(nativeObj);
-    }
+    // C++: enum DetectorType (cv.AgastFeatureDetector.DetectorType)
+    public static final int
+            AGAST_5_8 = 0,
+            AGAST_7_12d = 1,
+            AGAST_7_12s = 2,
+            OAST_9_16 = 3;
 
 
     //
@@ -62,20 +53,11 @@ public class AgastFeatureDetector extends Feature2D {
 
 
     //
-    // C++:  String cv::AgastFeatureDetector::getDefaultName()
+    // C++:  void cv::AgastFeatureDetector::setThreshold(int threshold)
     //
 
-    public String getDefaultName() {
-        return getDefaultName_0(nativeObj);
-    }
-
-
-    //
-    // C++:  bool cv::AgastFeatureDetector::getNonmaxSuppression()
-    //
-
-    public boolean getNonmaxSuppression() {
-        return getNonmaxSuppression_0(nativeObj);
+    public void setThreshold(int threshold) {
+        setThreshold_0(nativeObj, threshold);
     }
 
 
@@ -98,11 +80,11 @@ public class AgastFeatureDetector extends Feature2D {
 
 
     //
-    // C++:  void cv::AgastFeatureDetector::setThreshold(int threshold)
+    // C++:  bool cv::AgastFeatureDetector::getNonmaxSuppression()
     //
 
-    public void setThreshold(int threshold) {
-        setThreshold_0(nativeObj, threshold);
+    public boolean getNonmaxSuppression() {
+        return getNonmaxSuppression_0(nativeObj);
     }
 
 
@@ -115,6 +97,24 @@ public class AgastFeatureDetector extends Feature2D {
     }
 
 
+    //
+    // C++:  AgastFeatureDetector_DetectorType cv::AgastFeatureDetector::getType()
+    //
+
+    public int getType() {
+        return getType_0(nativeObj);
+    }
+
+
+    //
+    // C++:  String cv::AgastFeatureDetector::getDefaultName()
+    //
+
+    public String getDefaultName() {
+        return getDefaultName_0(nativeObj);
+    }
+
+
     @Override
     protected void finalize() throws Throwable {
         delete(nativeObj);
@@ -122,20 +122,14 @@ public class AgastFeatureDetector extends Feature2D {
 
 
 
-    // C++:  AgastFeatureDetector_DetectorType cv::AgastFeatureDetector::getType()
-    private static native int getType_0(long nativeObj);
-
     // C++: static Ptr_AgastFeatureDetector cv::AgastFeatureDetector::create(int threshold = 10, bool nonmaxSuppression = true, AgastFeatureDetector_DetectorType type = AgastFeatureDetector::OAST_9_16)
     private static native long create_0(int threshold, boolean nonmaxSuppression, int type);
     private static native long create_1(int threshold, boolean nonmaxSuppression);
     private static native long create_2(int threshold);
     private static native long create_3();
 
-    // C++:  String cv::AgastFeatureDetector::getDefaultName()
-    private static native String getDefaultName_0(long nativeObj);
-
-    // C++:  bool cv::AgastFeatureDetector::getNonmaxSuppression()
-    private static native boolean getNonmaxSuppression_0(long nativeObj);
+    // C++:  void cv::AgastFeatureDetector::setThreshold(int threshold)
+    private static native void setThreshold_0(long nativeObj, int threshold);
 
     // C++:  int cv::AgastFeatureDetector::getThreshold()
     private static native int getThreshold_0(long nativeObj);
@@ -143,11 +137,17 @@ public class AgastFeatureDetector extends Feature2D {
     // C++:  void cv::AgastFeatureDetector::setNonmaxSuppression(bool f)
     private static native void setNonmaxSuppression_0(long nativeObj, boolean f);
 
-    // C++:  void cv::AgastFeatureDetector::setThreshold(int threshold)
-    private static native void setThreshold_0(long nativeObj, int threshold);
+    // C++:  bool cv::AgastFeatureDetector::getNonmaxSuppression()
+    private static native boolean getNonmaxSuppression_0(long nativeObj);
 
     // C++:  void cv::AgastFeatureDetector::setType(AgastFeatureDetector_DetectorType type)
     private static native void setType_0(long nativeObj, int type);
+
+    // C++:  AgastFeatureDetector_DetectorType cv::AgastFeatureDetector::getType()
+    private static native int getType_0(long nativeObj);
+
+    // C++:  String cv::AgastFeatureDetector::getDefaultName()
+    private static native String getDefaultName_0(long nativeObj);
 
     // native support for java finalize()
     private static native void delete(long nativeObj);
