@@ -4659,6 +4659,8 @@ public class Calib3d {
      * the board to make the detection more robust in various environments. Otherwise, if there is no
      * border and the background is dark, the outer black squares cannot be segmented properly and so the
      * square grouping and ordering algorithm fails.
+     *
+     * Use gen_pattern.py (REF: tutorial_camera_calibration_pattern) to create checkerboard.
      * @return automatically generated
      */
     public static boolean findChessboardCorners(Mat image, Size patternSize, MatOfPoint2f corners, int flags) {
@@ -4724,6 +4726,8 @@ public class Calib3d {
      * the board to make the detection more robust in various environments. Otherwise, if there is no
      * border and the background is dark, the outer black squares cannot be segmented properly and so the
      * square grouping and ordering algorithm fails.
+     *
+     * Use gen_pattern.py (REF: tutorial_camera_calibration_pattern) to create checkerboard.
      * @return automatically generated
      */
     public static boolean findChessboardCorners(Mat image, Size patternSize, MatOfPoint2f corners) {
@@ -4814,6 +4818,8 @@ public class Calib3d {
      * which are located on the outside of the board. The following figure illustrates
      * a sample checkerboard optimized for the detection. However, any other checkerboard
      * can be used as well.
+     *
+     * Use gen_pattern.py (REF: tutorial_camera_calibration_pattern) to create checkerboard.
      * ![Checkerboard](pics/checkerboard_radon.png)
      * @return automatically generated
      */
@@ -9176,6 +9182,376 @@ public class Calib3d {
 
 
     //
+    // C++:  int cv::recoverPose(Mat points1, Mat points2, Mat cameraMatrix1, Mat distCoeffs1, Mat cameraMatrix2, Mat distCoeffs2, Mat& E, Mat& R, Mat& t, int method = cv::RANSAC, double prob = 0.999, double threshold = 1.0, Mat& mask = Mat())
+    //
+
+    /**
+     * Recovers the relative camera rotation and the translation from corresponding points in two images from two different cameras, using cheirality check. Returns the number of
+     * inliers that pass the check.
+     *
+     * @param points1 Array of N 2D points from the first image. The point coordinates should be
+     * floating-point (single or double precision).
+     * @param points2 Array of the second image points of the same size and format as points1 .
+     * @param cameraMatrix1 Input/output camera matrix for the first camera, the same as in
+     * REF: calibrateCamera. Furthermore, for the stereo case, additional flags may be used, see below.
+     * @param distCoeffs1 Input/output vector of distortion coefficients, the same as in
+     * REF: calibrateCamera.
+     * @param cameraMatrix2 Input/output camera matrix for the first camera, the same as in
+     * REF: calibrateCamera. Furthermore, for the stereo case, additional flags may be used, see below.
+     * @param distCoeffs2 Input/output vector of distortion coefficients, the same as in
+     * REF: calibrateCamera.
+     * @param E The output essential matrix.
+     * @param R Output rotation matrix. Together with the translation vector, this matrix makes up a tuple
+     * that performs a change of basis from the first camera's coordinate system to the second camera's
+     * coordinate system. Note that, in general, t can not be used for this tuple, see the parameter
+     * described below.
+     * @param t Output translation vector. This vector is obtained by REF: decomposeEssentialMat and
+     * therefore is only known up to scale, i.e. t is the direction of the translation vector and has unit
+     * length.
+     * @param method Method for computing an essential matrix.
+     * <ul>
+     *   <li>
+     *    REF: RANSAC for the RANSAC algorithm.
+     *   </li>
+     *   <li>
+     *    REF: LMEDS for the LMedS algorithm.
+     * @param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
+     * confidence (probability) that the estimated matrix is correct.
+     * @param threshold Parameter used for RANSAC. It is the maximum distance from a point to an epipolar
+     * line in pixels, beyond which the point is considered an outlier and is not used for computing the
+     * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
+     * point localization, image resolution, and the image noise.
+     * @param mask Input/output mask for inliers in points1 and points2. If it is not empty, then it marks
+     * inliers in points1 and points2 for then given essential matrix E. Only these inliers will be used to
+     * recover pose. In the output mask only inliers which pass the cheirality check.
+     *   </li>
+     * </ul>
+     *
+     * This function decomposes an essential matrix using REF: decomposeEssentialMat and then verifies
+     * possible pose hypotheses by doing cheirality check. The cheirality check means that the
+     * triangulated 3D points should have positive depth. Some details can be found in CITE: Nister03.
+     *
+     * This function can be used to process the output E and mask from REF: findEssentialMat. In this
+     * scenario, points1 and points2 are the same input for findEssentialMat.:
+     * <code>
+     *     // Example. Estimation of fundamental matrix using the RANSAC algorithm
+     *     int point_count = 100;
+     *     vector&lt;Point2f&gt; points1(point_count);
+     *     vector&lt;Point2f&gt; points2(point_count);
+     *
+     *     // initialize the points here ...
+     *     for( int i = 0; i &lt; point_count; i++ )
+     *     {
+     *         points1[i] = ...;
+     *         points2[i] = ...;
+     *     }
+     *
+     *     // Input: camera calibration of both cameras, for example using intrinsic chessboard calibration.
+     *     Mat cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2;
+     *
+     *     // Output: Essential matrix, relative rotation and relative translation.
+     *     Mat E, R, t, mask;
+     *
+     *     recoverPose(points1, points2, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, E, R, t, mask);
+     * </code>
+     * @return automatically generated
+     */
+    public static int recoverPose(Mat points1, Mat points2, Mat cameraMatrix1, Mat distCoeffs1, Mat cameraMatrix2, Mat distCoeffs2, Mat E, Mat R, Mat t, int method, double prob, double threshold, Mat mask) {
+        return recoverPose_0(points1.nativeObj, points2.nativeObj, cameraMatrix1.nativeObj, distCoeffs1.nativeObj, cameraMatrix2.nativeObj, distCoeffs2.nativeObj, E.nativeObj, R.nativeObj, t.nativeObj, method, prob, threshold, mask.nativeObj);
+    }
+
+    /**
+     * Recovers the relative camera rotation and the translation from corresponding points in two images from two different cameras, using cheirality check. Returns the number of
+     * inliers that pass the check.
+     *
+     * @param points1 Array of N 2D points from the first image. The point coordinates should be
+     * floating-point (single or double precision).
+     * @param points2 Array of the second image points of the same size and format as points1 .
+     * @param cameraMatrix1 Input/output camera matrix for the first camera, the same as in
+     * REF: calibrateCamera. Furthermore, for the stereo case, additional flags may be used, see below.
+     * @param distCoeffs1 Input/output vector of distortion coefficients, the same as in
+     * REF: calibrateCamera.
+     * @param cameraMatrix2 Input/output camera matrix for the first camera, the same as in
+     * REF: calibrateCamera. Furthermore, for the stereo case, additional flags may be used, see below.
+     * @param distCoeffs2 Input/output vector of distortion coefficients, the same as in
+     * REF: calibrateCamera.
+     * @param E The output essential matrix.
+     * @param R Output rotation matrix. Together with the translation vector, this matrix makes up a tuple
+     * that performs a change of basis from the first camera's coordinate system to the second camera's
+     * coordinate system. Note that, in general, t can not be used for this tuple, see the parameter
+     * described below.
+     * @param t Output translation vector. This vector is obtained by REF: decomposeEssentialMat and
+     * therefore is only known up to scale, i.e. t is the direction of the translation vector and has unit
+     * length.
+     * @param method Method for computing an essential matrix.
+     * <ul>
+     *   <li>
+     *    REF: RANSAC for the RANSAC algorithm.
+     *   </li>
+     *   <li>
+     *    REF: LMEDS for the LMedS algorithm.
+     * @param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
+     * confidence (probability) that the estimated matrix is correct.
+     * @param threshold Parameter used for RANSAC. It is the maximum distance from a point to an epipolar
+     * line in pixels, beyond which the point is considered an outlier and is not used for computing the
+     * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
+     * point localization, image resolution, and the image noise.
+     * inliers in points1 and points2 for then given essential matrix E. Only these inliers will be used to
+     * recover pose. In the output mask only inliers which pass the cheirality check.
+     *   </li>
+     * </ul>
+     *
+     * This function decomposes an essential matrix using REF: decomposeEssentialMat and then verifies
+     * possible pose hypotheses by doing cheirality check. The cheirality check means that the
+     * triangulated 3D points should have positive depth. Some details can be found in CITE: Nister03.
+     *
+     * This function can be used to process the output E and mask from REF: findEssentialMat. In this
+     * scenario, points1 and points2 are the same input for findEssentialMat.:
+     * <code>
+     *     // Example. Estimation of fundamental matrix using the RANSAC algorithm
+     *     int point_count = 100;
+     *     vector&lt;Point2f&gt; points1(point_count);
+     *     vector&lt;Point2f&gt; points2(point_count);
+     *
+     *     // initialize the points here ...
+     *     for( int i = 0; i &lt; point_count; i++ )
+     *     {
+     *         points1[i] = ...;
+     *         points2[i] = ...;
+     *     }
+     *
+     *     // Input: camera calibration of both cameras, for example using intrinsic chessboard calibration.
+     *     Mat cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2;
+     *
+     *     // Output: Essential matrix, relative rotation and relative translation.
+     *     Mat E, R, t, mask;
+     *
+     *     recoverPose(points1, points2, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, E, R, t, mask);
+     * </code>
+     * @return automatically generated
+     */
+    public static int recoverPose(Mat points1, Mat points2, Mat cameraMatrix1, Mat distCoeffs1, Mat cameraMatrix2, Mat distCoeffs2, Mat E, Mat R, Mat t, int method, double prob, double threshold) {
+        return recoverPose_1(points1.nativeObj, points2.nativeObj, cameraMatrix1.nativeObj, distCoeffs1.nativeObj, cameraMatrix2.nativeObj, distCoeffs2.nativeObj, E.nativeObj, R.nativeObj, t.nativeObj, method, prob, threshold);
+    }
+
+    /**
+     * Recovers the relative camera rotation and the translation from corresponding points in two images from two different cameras, using cheirality check. Returns the number of
+     * inliers that pass the check.
+     *
+     * @param points1 Array of N 2D points from the first image. The point coordinates should be
+     * floating-point (single or double precision).
+     * @param points2 Array of the second image points of the same size and format as points1 .
+     * @param cameraMatrix1 Input/output camera matrix for the first camera, the same as in
+     * REF: calibrateCamera. Furthermore, for the stereo case, additional flags may be used, see below.
+     * @param distCoeffs1 Input/output vector of distortion coefficients, the same as in
+     * REF: calibrateCamera.
+     * @param cameraMatrix2 Input/output camera matrix for the first camera, the same as in
+     * REF: calibrateCamera. Furthermore, for the stereo case, additional flags may be used, see below.
+     * @param distCoeffs2 Input/output vector of distortion coefficients, the same as in
+     * REF: calibrateCamera.
+     * @param E The output essential matrix.
+     * @param R Output rotation matrix. Together with the translation vector, this matrix makes up a tuple
+     * that performs a change of basis from the first camera's coordinate system to the second camera's
+     * coordinate system. Note that, in general, t can not be used for this tuple, see the parameter
+     * described below.
+     * @param t Output translation vector. This vector is obtained by REF: decomposeEssentialMat and
+     * therefore is only known up to scale, i.e. t is the direction of the translation vector and has unit
+     * length.
+     * @param method Method for computing an essential matrix.
+     * <ul>
+     *   <li>
+     *    REF: RANSAC for the RANSAC algorithm.
+     *   </li>
+     *   <li>
+     *    REF: LMEDS for the LMedS algorithm.
+     * @param prob Parameter used for the RANSAC or LMedS methods only. It specifies a desirable level of
+     * confidence (probability) that the estimated matrix is correct.
+     * line in pixels, beyond which the point is considered an outlier and is not used for computing the
+     * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
+     * point localization, image resolution, and the image noise.
+     * inliers in points1 and points2 for then given essential matrix E. Only these inliers will be used to
+     * recover pose. In the output mask only inliers which pass the cheirality check.
+     *   </li>
+     * </ul>
+     *
+     * This function decomposes an essential matrix using REF: decomposeEssentialMat and then verifies
+     * possible pose hypotheses by doing cheirality check. The cheirality check means that the
+     * triangulated 3D points should have positive depth. Some details can be found in CITE: Nister03.
+     *
+     * This function can be used to process the output E and mask from REF: findEssentialMat. In this
+     * scenario, points1 and points2 are the same input for findEssentialMat.:
+     * <code>
+     *     // Example. Estimation of fundamental matrix using the RANSAC algorithm
+     *     int point_count = 100;
+     *     vector&lt;Point2f&gt; points1(point_count);
+     *     vector&lt;Point2f&gt; points2(point_count);
+     *
+     *     // initialize the points here ...
+     *     for( int i = 0; i &lt; point_count; i++ )
+     *     {
+     *         points1[i] = ...;
+     *         points2[i] = ...;
+     *     }
+     *
+     *     // Input: camera calibration of both cameras, for example using intrinsic chessboard calibration.
+     *     Mat cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2;
+     *
+     *     // Output: Essential matrix, relative rotation and relative translation.
+     *     Mat E, R, t, mask;
+     *
+     *     recoverPose(points1, points2, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, E, R, t, mask);
+     * </code>
+     * @return automatically generated
+     */
+    public static int recoverPose(Mat points1, Mat points2, Mat cameraMatrix1, Mat distCoeffs1, Mat cameraMatrix2, Mat distCoeffs2, Mat E, Mat R, Mat t, int method, double prob) {
+        return recoverPose_2(points1.nativeObj, points2.nativeObj, cameraMatrix1.nativeObj, distCoeffs1.nativeObj, cameraMatrix2.nativeObj, distCoeffs2.nativeObj, E.nativeObj, R.nativeObj, t.nativeObj, method, prob);
+    }
+
+    /**
+     * Recovers the relative camera rotation and the translation from corresponding points in two images from two different cameras, using cheirality check. Returns the number of
+     * inliers that pass the check.
+     *
+     * @param points1 Array of N 2D points from the first image. The point coordinates should be
+     * floating-point (single or double precision).
+     * @param points2 Array of the second image points of the same size and format as points1 .
+     * @param cameraMatrix1 Input/output camera matrix for the first camera, the same as in
+     * REF: calibrateCamera. Furthermore, for the stereo case, additional flags may be used, see below.
+     * @param distCoeffs1 Input/output vector of distortion coefficients, the same as in
+     * REF: calibrateCamera.
+     * @param cameraMatrix2 Input/output camera matrix for the first camera, the same as in
+     * REF: calibrateCamera. Furthermore, for the stereo case, additional flags may be used, see below.
+     * @param distCoeffs2 Input/output vector of distortion coefficients, the same as in
+     * REF: calibrateCamera.
+     * @param E The output essential matrix.
+     * @param R Output rotation matrix. Together with the translation vector, this matrix makes up a tuple
+     * that performs a change of basis from the first camera's coordinate system to the second camera's
+     * coordinate system. Note that, in general, t can not be used for this tuple, see the parameter
+     * described below.
+     * @param t Output translation vector. This vector is obtained by REF: decomposeEssentialMat and
+     * therefore is only known up to scale, i.e. t is the direction of the translation vector and has unit
+     * length.
+     * @param method Method for computing an essential matrix.
+     * <ul>
+     *   <li>
+     *    REF: RANSAC for the RANSAC algorithm.
+     *   </li>
+     *   <li>
+     *    REF: LMEDS for the LMedS algorithm.
+     * confidence (probability) that the estimated matrix is correct.
+     * line in pixels, beyond which the point is considered an outlier and is not used for computing the
+     * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
+     * point localization, image resolution, and the image noise.
+     * inliers in points1 and points2 for then given essential matrix E. Only these inliers will be used to
+     * recover pose. In the output mask only inliers which pass the cheirality check.
+     *   </li>
+     * </ul>
+     *
+     * This function decomposes an essential matrix using REF: decomposeEssentialMat and then verifies
+     * possible pose hypotheses by doing cheirality check. The cheirality check means that the
+     * triangulated 3D points should have positive depth. Some details can be found in CITE: Nister03.
+     *
+     * This function can be used to process the output E and mask from REF: findEssentialMat. In this
+     * scenario, points1 and points2 are the same input for findEssentialMat.:
+     * <code>
+     *     // Example. Estimation of fundamental matrix using the RANSAC algorithm
+     *     int point_count = 100;
+     *     vector&lt;Point2f&gt; points1(point_count);
+     *     vector&lt;Point2f&gt; points2(point_count);
+     *
+     *     // initialize the points here ...
+     *     for( int i = 0; i &lt; point_count; i++ )
+     *     {
+     *         points1[i] = ...;
+     *         points2[i] = ...;
+     *     }
+     *
+     *     // Input: camera calibration of both cameras, for example using intrinsic chessboard calibration.
+     *     Mat cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2;
+     *
+     *     // Output: Essential matrix, relative rotation and relative translation.
+     *     Mat E, R, t, mask;
+     *
+     *     recoverPose(points1, points2, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, E, R, t, mask);
+     * </code>
+     * @return automatically generated
+     */
+    public static int recoverPose(Mat points1, Mat points2, Mat cameraMatrix1, Mat distCoeffs1, Mat cameraMatrix2, Mat distCoeffs2, Mat E, Mat R, Mat t, int method) {
+        return recoverPose_3(points1.nativeObj, points2.nativeObj, cameraMatrix1.nativeObj, distCoeffs1.nativeObj, cameraMatrix2.nativeObj, distCoeffs2.nativeObj, E.nativeObj, R.nativeObj, t.nativeObj, method);
+    }
+
+    /**
+     * Recovers the relative camera rotation and the translation from corresponding points in two images from two different cameras, using cheirality check. Returns the number of
+     * inliers that pass the check.
+     *
+     * @param points1 Array of N 2D points from the first image. The point coordinates should be
+     * floating-point (single or double precision).
+     * @param points2 Array of the second image points of the same size and format as points1 .
+     * @param cameraMatrix1 Input/output camera matrix for the first camera, the same as in
+     * REF: calibrateCamera. Furthermore, for the stereo case, additional flags may be used, see below.
+     * @param distCoeffs1 Input/output vector of distortion coefficients, the same as in
+     * REF: calibrateCamera.
+     * @param cameraMatrix2 Input/output camera matrix for the first camera, the same as in
+     * REF: calibrateCamera. Furthermore, for the stereo case, additional flags may be used, see below.
+     * @param distCoeffs2 Input/output vector of distortion coefficients, the same as in
+     * REF: calibrateCamera.
+     * @param E The output essential matrix.
+     * @param R Output rotation matrix. Together with the translation vector, this matrix makes up a tuple
+     * that performs a change of basis from the first camera's coordinate system to the second camera's
+     * coordinate system. Note that, in general, t can not be used for this tuple, see the parameter
+     * described below.
+     * @param t Output translation vector. This vector is obtained by REF: decomposeEssentialMat and
+     * therefore is only known up to scale, i.e. t is the direction of the translation vector and has unit
+     * length.
+     * <ul>
+     *   <li>
+     *    REF: RANSAC for the RANSAC algorithm.
+     *   </li>
+     *   <li>
+     *    REF: LMEDS for the LMedS algorithm.
+     * confidence (probability) that the estimated matrix is correct.
+     * line in pixels, beyond which the point is considered an outlier and is not used for computing the
+     * final fundamental matrix. It can be set to something like 1-3, depending on the accuracy of the
+     * point localization, image resolution, and the image noise.
+     * inliers in points1 and points2 for then given essential matrix E. Only these inliers will be used to
+     * recover pose. In the output mask only inliers which pass the cheirality check.
+     *   </li>
+     * </ul>
+     *
+     * This function decomposes an essential matrix using REF: decomposeEssentialMat and then verifies
+     * possible pose hypotheses by doing cheirality check. The cheirality check means that the
+     * triangulated 3D points should have positive depth. Some details can be found in CITE: Nister03.
+     *
+     * This function can be used to process the output E and mask from REF: findEssentialMat. In this
+     * scenario, points1 and points2 are the same input for findEssentialMat.:
+     * <code>
+     *     // Example. Estimation of fundamental matrix using the RANSAC algorithm
+     *     int point_count = 100;
+     *     vector&lt;Point2f&gt; points1(point_count);
+     *     vector&lt;Point2f&gt; points2(point_count);
+     *
+     *     // initialize the points here ...
+     *     for( int i = 0; i &lt; point_count; i++ )
+     *     {
+     *         points1[i] = ...;
+     *         points2[i] = ...;
+     *     }
+     *
+     *     // Input: camera calibration of both cameras, for example using intrinsic chessboard calibration.
+     *     Mat cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2;
+     *
+     *     // Output: Essential matrix, relative rotation and relative translation.
+     *     Mat E, R, t, mask;
+     *
+     *     recoverPose(points1, points2, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, E, R, t, mask);
+     * </code>
+     * @return automatically generated
+     */
+    public static int recoverPose(Mat points1, Mat points2, Mat cameraMatrix1, Mat distCoeffs1, Mat cameraMatrix2, Mat distCoeffs2, Mat E, Mat R, Mat t) {
+        return recoverPose_4(points1.nativeObj, points2.nativeObj, cameraMatrix1.nativeObj, distCoeffs1.nativeObj, cameraMatrix2.nativeObj, distCoeffs2.nativeObj, E.nativeObj, R.nativeObj, t.nativeObj);
+    }
+
+
+    //
     // C++:  int cv::recoverPose(Mat E, Mat points1, Mat points2, Mat cameraMatrix, Mat& R, Mat& t, Mat& mask = Mat())
     //
 
@@ -9232,7 +9608,7 @@ public class Calib3d {
      * @return automatically generated
      */
     public static int recoverPose(Mat E, Mat points1, Mat points2, Mat cameraMatrix, Mat R, Mat t, Mat mask) {
-        return recoverPose_0(E.nativeObj, points1.nativeObj, points2.nativeObj, cameraMatrix.nativeObj, R.nativeObj, t.nativeObj, mask.nativeObj);
+        return recoverPose_5(E.nativeObj, points1.nativeObj, points2.nativeObj, cameraMatrix.nativeObj, R.nativeObj, t.nativeObj, mask.nativeObj);
     }
 
     /**
@@ -9287,7 +9663,7 @@ public class Calib3d {
      * @return automatically generated
      */
     public static int recoverPose(Mat E, Mat points1, Mat points2, Mat cameraMatrix, Mat R, Mat t) {
-        return recoverPose_1(E.nativeObj, points1.nativeObj, points2.nativeObj, cameraMatrix.nativeObj, R.nativeObj, t.nativeObj);
+        return recoverPose_6(E.nativeObj, points1.nativeObj, points2.nativeObj, cameraMatrix.nativeObj, R.nativeObj, t.nativeObj);
     }
 
 
@@ -9327,7 +9703,7 @@ public class Calib3d {
      * @return automatically generated
      */
     public static int recoverPose(Mat E, Mat points1, Mat points2, Mat R, Mat t, double focal, Point pp, Mat mask) {
-        return recoverPose_2(E.nativeObj, points1.nativeObj, points2.nativeObj, R.nativeObj, t.nativeObj, focal, pp.x, pp.y, mask.nativeObj);
+        return recoverPose_7(E.nativeObj, points1.nativeObj, points2.nativeObj, R.nativeObj, t.nativeObj, focal, pp.x, pp.y, mask.nativeObj);
     }
 
     /**
@@ -9361,7 +9737,7 @@ public class Calib3d {
      * @return automatically generated
      */
     public static int recoverPose(Mat E, Mat points1, Mat points2, Mat R, Mat t, double focal, Point pp) {
-        return recoverPose_3(E.nativeObj, points1.nativeObj, points2.nativeObj, R.nativeObj, t.nativeObj, focal, pp.x, pp.y);
+        return recoverPose_8(E.nativeObj, points1.nativeObj, points2.nativeObj, R.nativeObj, t.nativeObj, focal, pp.x, pp.y);
     }
 
     /**
@@ -9394,7 +9770,7 @@ public class Calib3d {
      * @return automatically generated
      */
     public static int recoverPose(Mat E, Mat points1, Mat points2, Mat R, Mat t, double focal) {
-        return recoverPose_4(E.nativeObj, points1.nativeObj, points2.nativeObj, R.nativeObj, t.nativeObj, focal);
+        return recoverPose_9(E.nativeObj, points1.nativeObj, points2.nativeObj, R.nativeObj, t.nativeObj, focal);
     }
 
     /**
@@ -9426,7 +9802,7 @@ public class Calib3d {
      * @return automatically generated
      */
     public static int recoverPose(Mat E, Mat points1, Mat points2, Mat R, Mat t) {
-        return recoverPose_5(E.nativeObj, points1.nativeObj, points2.nativeObj, R.nativeObj, t.nativeObj);
+        return recoverPose_10(E.nativeObj, points1.nativeObj, points2.nativeObj, R.nativeObj, t.nativeObj);
     }
 
 
@@ -9462,7 +9838,7 @@ public class Calib3d {
      * @return automatically generated
      */
     public static int recoverPose(Mat E, Mat points1, Mat points2, Mat cameraMatrix, Mat R, Mat t, double distanceThresh, Mat mask, Mat triangulatedPoints) {
-        return recoverPose_6(E.nativeObj, points1.nativeObj, points2.nativeObj, cameraMatrix.nativeObj, R.nativeObj, t.nativeObj, distanceThresh, mask.nativeObj, triangulatedPoints.nativeObj);
+        return recoverPose_11(E.nativeObj, points1.nativeObj, points2.nativeObj, cameraMatrix.nativeObj, R.nativeObj, t.nativeObj, distanceThresh, mask.nativeObj, triangulatedPoints.nativeObj);
     }
 
     /**
@@ -9492,7 +9868,7 @@ public class Calib3d {
      * @return automatically generated
      */
     public static int recoverPose(Mat E, Mat points1, Mat points2, Mat cameraMatrix, Mat R, Mat t, double distanceThresh, Mat mask) {
-        return recoverPose_7(E.nativeObj, points1.nativeObj, points2.nativeObj, cameraMatrix.nativeObj, R.nativeObj, t.nativeObj, distanceThresh, mask.nativeObj);
+        return recoverPose_12(E.nativeObj, points1.nativeObj, points2.nativeObj, cameraMatrix.nativeObj, R.nativeObj, t.nativeObj, distanceThresh, mask.nativeObj);
     }
 
     /**
@@ -9521,7 +9897,7 @@ public class Calib3d {
      * @return automatically generated
      */
     public static int recoverPose(Mat E, Mat points1, Mat points2, Mat cameraMatrix, Mat R, Mat t, double distanceThresh) {
-        return recoverPose_8(E.nativeObj, points1.nativeObj, points2.nativeObj, cameraMatrix.nativeObj, R.nativeObj, t.nativeObj, distanceThresh);
+        return recoverPose_13(E.nativeObj, points1.nativeObj, points2.nativeObj, cameraMatrix.nativeObj, R.nativeObj, t.nativeObj, distanceThresh);
     }
 
 
@@ -12753,20 +13129,27 @@ public class Calib3d {
     // C++:  void cv::decomposeEssentialMat(Mat E, Mat& R1, Mat& R2, Mat& t)
     private static native void decomposeEssentialMat_0(long E_nativeObj, long R1_nativeObj, long R2_nativeObj, long t_nativeObj);
 
+    // C++:  int cv::recoverPose(Mat points1, Mat points2, Mat cameraMatrix1, Mat distCoeffs1, Mat cameraMatrix2, Mat distCoeffs2, Mat& E, Mat& R, Mat& t, int method = cv::RANSAC, double prob = 0.999, double threshold = 1.0, Mat& mask = Mat())
+    private static native int recoverPose_0(long points1_nativeObj, long points2_nativeObj, long cameraMatrix1_nativeObj, long distCoeffs1_nativeObj, long cameraMatrix2_nativeObj, long distCoeffs2_nativeObj, long E_nativeObj, long R_nativeObj, long t_nativeObj, int method, double prob, double threshold, long mask_nativeObj);
+    private static native int recoverPose_1(long points1_nativeObj, long points2_nativeObj, long cameraMatrix1_nativeObj, long distCoeffs1_nativeObj, long cameraMatrix2_nativeObj, long distCoeffs2_nativeObj, long E_nativeObj, long R_nativeObj, long t_nativeObj, int method, double prob, double threshold);
+    private static native int recoverPose_2(long points1_nativeObj, long points2_nativeObj, long cameraMatrix1_nativeObj, long distCoeffs1_nativeObj, long cameraMatrix2_nativeObj, long distCoeffs2_nativeObj, long E_nativeObj, long R_nativeObj, long t_nativeObj, int method, double prob);
+    private static native int recoverPose_3(long points1_nativeObj, long points2_nativeObj, long cameraMatrix1_nativeObj, long distCoeffs1_nativeObj, long cameraMatrix2_nativeObj, long distCoeffs2_nativeObj, long E_nativeObj, long R_nativeObj, long t_nativeObj, int method);
+    private static native int recoverPose_4(long points1_nativeObj, long points2_nativeObj, long cameraMatrix1_nativeObj, long distCoeffs1_nativeObj, long cameraMatrix2_nativeObj, long distCoeffs2_nativeObj, long E_nativeObj, long R_nativeObj, long t_nativeObj);
+
     // C++:  int cv::recoverPose(Mat E, Mat points1, Mat points2, Mat cameraMatrix, Mat& R, Mat& t, Mat& mask = Mat())
-    private static native int recoverPose_0(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long cameraMatrix_nativeObj, long R_nativeObj, long t_nativeObj, long mask_nativeObj);
-    private static native int recoverPose_1(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long cameraMatrix_nativeObj, long R_nativeObj, long t_nativeObj);
+    private static native int recoverPose_5(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long cameraMatrix_nativeObj, long R_nativeObj, long t_nativeObj, long mask_nativeObj);
+    private static native int recoverPose_6(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long cameraMatrix_nativeObj, long R_nativeObj, long t_nativeObj);
 
     // C++:  int cv::recoverPose(Mat E, Mat points1, Mat points2, Mat& R, Mat& t, double focal = 1.0, Point2d pp = Point2d(0, 0), Mat& mask = Mat())
-    private static native int recoverPose_2(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long R_nativeObj, long t_nativeObj, double focal, double pp_x, double pp_y, long mask_nativeObj);
-    private static native int recoverPose_3(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long R_nativeObj, long t_nativeObj, double focal, double pp_x, double pp_y);
-    private static native int recoverPose_4(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long R_nativeObj, long t_nativeObj, double focal);
-    private static native int recoverPose_5(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long R_nativeObj, long t_nativeObj);
+    private static native int recoverPose_7(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long R_nativeObj, long t_nativeObj, double focal, double pp_x, double pp_y, long mask_nativeObj);
+    private static native int recoverPose_8(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long R_nativeObj, long t_nativeObj, double focal, double pp_x, double pp_y);
+    private static native int recoverPose_9(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long R_nativeObj, long t_nativeObj, double focal);
+    private static native int recoverPose_10(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long R_nativeObj, long t_nativeObj);
 
     // C++:  int cv::recoverPose(Mat E, Mat points1, Mat points2, Mat cameraMatrix, Mat& R, Mat& t, double distanceThresh, Mat& mask = Mat(), Mat& triangulatedPoints = Mat())
-    private static native int recoverPose_6(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long cameraMatrix_nativeObj, long R_nativeObj, long t_nativeObj, double distanceThresh, long mask_nativeObj, long triangulatedPoints_nativeObj);
-    private static native int recoverPose_7(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long cameraMatrix_nativeObj, long R_nativeObj, long t_nativeObj, double distanceThresh, long mask_nativeObj);
-    private static native int recoverPose_8(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long cameraMatrix_nativeObj, long R_nativeObj, long t_nativeObj, double distanceThresh);
+    private static native int recoverPose_11(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long cameraMatrix_nativeObj, long R_nativeObj, long t_nativeObj, double distanceThresh, long mask_nativeObj, long triangulatedPoints_nativeObj);
+    private static native int recoverPose_12(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long cameraMatrix_nativeObj, long R_nativeObj, long t_nativeObj, double distanceThresh, long mask_nativeObj);
+    private static native int recoverPose_13(long E_nativeObj, long points1_nativeObj, long points2_nativeObj, long cameraMatrix_nativeObj, long R_nativeObj, long t_nativeObj, double distanceThresh);
 
     // C++:  void cv::computeCorrespondEpilines(Mat points, int whichImage, Mat F, Mat& lines)
     private static native void computeCorrespondEpilines_0(long points_nativeObj, int whichImage, long F_nativeObj, long lines_nativeObj);

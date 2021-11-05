@@ -618,8 +618,6 @@ public class Imgproc {
      * @param log_eps Detection threshold: -log10(NFA) &gt; log_eps. Used only when advance refinement is chosen.
      * @param density_th Minimal density of aligned region points in the enclosing rectangle.
      * @param n_bins Number of bins in pseudo-ordering of gradient modulus.
-     *
-     * <b>Note:</b> Implementation has been removed due original code license conflict
      * @return automatically generated
      */
     public static LineSegmentDetector createLineSegmentDetector(int refine, double scale, double sigma_scale, double quant, double ang_th, double log_eps, double density_th, int n_bins) {
@@ -639,8 +637,6 @@ public class Imgproc {
      * @param ang_th Gradient angle tolerance in degrees.
      * @param log_eps Detection threshold: -log10(NFA) &gt; log_eps. Used only when advance refinement is chosen.
      * @param density_th Minimal density of aligned region points in the enclosing rectangle.
-     *
-     * <b>Note:</b> Implementation has been removed due original code license conflict
      * @return automatically generated
      */
     public static LineSegmentDetector createLineSegmentDetector(int refine, double scale, double sigma_scale, double quant, double ang_th, double log_eps, double density_th) {
@@ -659,8 +655,6 @@ public class Imgproc {
      * @param quant Bound to the quantization error on the gradient norm.
      * @param ang_th Gradient angle tolerance in degrees.
      * @param log_eps Detection threshold: -log10(NFA) &gt; log_eps. Used only when advance refinement is chosen.
-     *
-     * <b>Note:</b> Implementation has been removed due original code license conflict
      * @return automatically generated
      */
     public static LineSegmentDetector createLineSegmentDetector(int refine, double scale, double sigma_scale, double quant, double ang_th, double log_eps) {
@@ -678,8 +672,6 @@ public class Imgproc {
      * @param sigma_scale Sigma for Gaussian filter. It is computed as sigma = sigma_scale/scale.
      * @param quant Bound to the quantization error on the gradient norm.
      * @param ang_th Gradient angle tolerance in degrees.
-     *
-     * <b>Note:</b> Implementation has been removed due original code license conflict
      * @return automatically generated
      */
     public static LineSegmentDetector createLineSegmentDetector(int refine, double scale, double sigma_scale, double quant, double ang_th) {
@@ -696,8 +688,6 @@ public class Imgproc {
      * @param scale The scale of the image that will be used to find the lines. Range (0..1].
      * @param sigma_scale Sigma for Gaussian filter. It is computed as sigma = sigma_scale/scale.
      * @param quant Bound to the quantization error on the gradient norm.
-     *
-     * <b>Note:</b> Implementation has been removed due original code license conflict
      * @return automatically generated
      */
     public static LineSegmentDetector createLineSegmentDetector(int refine, double scale, double sigma_scale, double quant) {
@@ -713,8 +703,6 @@ public class Imgproc {
      * @param refine The way found lines will be refined, see #LineSegmentDetectorModes
      * @param scale The scale of the image that will be used to find the lines. Range (0..1].
      * @param sigma_scale Sigma for Gaussian filter. It is computed as sigma = sigma_scale/scale.
-     *
-     * <b>Note:</b> Implementation has been removed due original code license conflict
      * @return automatically generated
      */
     public static LineSegmentDetector createLineSegmentDetector(int refine, double scale, double sigma_scale) {
@@ -729,8 +717,6 @@ public class Imgproc {
      *
      * @param refine The way found lines will be refined, see #LineSegmentDetectorModes
      * @param scale The scale of the image that will be used to find the lines. Range (0..1].
-     *
-     * <b>Note:</b> Implementation has been removed due original code license conflict
      * @return automatically generated
      */
     public static LineSegmentDetector createLineSegmentDetector(int refine, double scale) {
@@ -744,8 +730,6 @@ public class Imgproc {
      * to edit those, as to tailor it for their own application.
      *
      * @param refine The way found lines will be refined, see #LineSegmentDetectorModes
-     *
-     * <b>Note:</b> Implementation has been removed due original code license conflict
      * @return automatically generated
      */
     public static LineSegmentDetector createLineSegmentDetector(int refine) {
@@ -758,8 +742,6 @@ public class Imgproc {
      * The LineSegmentDetector algorithm is defined using the standard values. Only advanced users may want
      * to edit those, as to tailor it for their own application.
      *
-     *
-     * <b>Note:</b> Implementation has been removed due original code license conflict
      * @return automatically generated
      */
     public static LineSegmentDetector createLineSegmentDetector() {
@@ -4019,7 +4001,7 @@ public class Imgproc {
      * @param src input image.
      * @param dst output image; it has the size dsize (when it is non-zero) or the size computed from
      * src.size(), fx, and fy; the type of dst is the same as of src.
-     * @param dsize output image size; if it equals zero, it is computed as:
+     * @param dsize output image size; if it equals zero ({@code None} in Python), it is computed as:
      *  \(\texttt{dsize = Size(round(fx*src.cols), round(fy*src.rows))}\)
      *  Either dsize or both fx and fy must be non-zero.
      * @param fx scale factor along the horizontal axis; when it equals 0, it is computed as
@@ -4058,7 +4040,7 @@ public class Imgproc {
      * @param src input image.
      * @param dst output image; it has the size dsize (when it is non-zero) or the size computed from
      * src.size(), fx, and fy; the type of dst is the same as of src.
-     * @param dsize output image size; if it equals zero, it is computed as:
+     * @param dsize output image size; if it equals zero ({@code None} in Python), it is computed as:
      *  \(\texttt{dsize = Size(round(fx*src.cols), round(fy*src.rows))}\)
      *  Either dsize or both fx and fy must be non-zero.
      * @param fx scale factor along the horizontal axis; when it equals 0, it is computed as
@@ -4096,7 +4078,7 @@ public class Imgproc {
      * @param src input image.
      * @param dst output image; it has the size dsize (when it is non-zero) or the size computed from
      * src.size(), fx, and fy; the type of dst is the same as of src.
-     * @param dsize output image size; if it equals zero, it is computed as:
+     * @param dsize output image size; if it equals zero ({@code None} in Python), it is computed as:
      *  \(\texttt{dsize = Size(round(fx*src.cols), round(fy*src.rows))}\)
      *  Either dsize or both fx and fy must be non-zero.
      * @param fx scale factor along the horizontal axis; when it equals 0, it is computed as
@@ -4133,7 +4115,7 @@ public class Imgproc {
      * @param src input image.
      * @param dst output image; it has the size dsize (when it is non-zero) or the size computed from
      * src.size(), fx, and fy; the type of dst is the same as of src.
-     * @param dsize output image size; if it equals zero, it is computed as:
+     * @param dsize output image size; if it equals zero ({@code None} in Python), it is computed as:
      *  \(\texttt{dsize = Size(round(fx*src.cols), round(fy*src.rows))}\)
      *  Either dsize or both fx and fy must be non-zero.
      * \(\texttt{(double)dsize.width/src.cols}\)
@@ -4978,36 +4960,6 @@ public class Imgproc {
 
 
     //
-    // C++:  void cv::integral(Mat src, Mat& sum, int sdepth = -1)
-    //
-
-    public static void integral(Mat src, Mat sum, int sdepth) {
-        integral_0(src.nativeObj, sum.nativeObj, sdepth);
-    }
-
-    public static void integral(Mat src, Mat sum) {
-        integral_1(src.nativeObj, sum.nativeObj);
-    }
-
-
-    //
-    // C++:  void cv::integral(Mat src, Mat& sum, Mat& sqsum, int sdepth = -1, int sqdepth = -1)
-    //
-
-    public static void integral2(Mat src, Mat sum, Mat sqsum, int sdepth, int sqdepth) {
-        integral2_0(src.nativeObj, sum.nativeObj, sqsum.nativeObj, sdepth, sqdepth);
-    }
-
-    public static void integral2(Mat src, Mat sum, Mat sqsum, int sdepth) {
-        integral2_1(src.nativeObj, sum.nativeObj, sqsum.nativeObj, sdepth);
-    }
-
-    public static void integral2(Mat src, Mat sum, Mat sqsum) {
-        integral2_2(src.nativeObj, sum.nativeObj, sqsum.nativeObj);
-    }
-
-
-    //
     // C++:  void cv::integral(Mat src, Mat& sum, Mat& sqsum, Mat& tilted, int sdepth = -1, int sqdepth = -1)
     //
 
@@ -5123,6 +5075,36 @@ public class Imgproc {
      */
     public static void integral3(Mat src, Mat sum, Mat sqsum, Mat tilted) {
         integral3_2(src.nativeObj, sum.nativeObj, sqsum.nativeObj, tilted.nativeObj);
+    }
+
+
+    //
+    // C++:  void cv::integral(Mat src, Mat& sum, int sdepth = -1)
+    //
+
+    public static void integral(Mat src, Mat sum, int sdepth) {
+        integral_0(src.nativeObj, sum.nativeObj, sdepth);
+    }
+
+    public static void integral(Mat src, Mat sum) {
+        integral_1(src.nativeObj, sum.nativeObj);
+    }
+
+
+    //
+    // C++:  void cv::integral(Mat src, Mat& sum, Mat& sqsum, int sdepth = -1, int sqdepth = -1)
+    //
+
+    public static void integral2(Mat src, Mat sum, Mat sqsum, int sdepth, int sqdepth) {
+        integral2_0(src.nativeObj, sum.nativeObj, sqsum.nativeObj, sdepth, sqdepth);
+    }
+
+    public static void integral2(Mat src, Mat sum, Mat sqsum, int sdepth) {
+        integral2_1(src.nativeObj, sum.nativeObj, sqsum.nativeObj, sdepth);
+    }
+
+    public static void integral2(Mat src, Mat sum, Mat sqsum) {
+        integral2_2(src.nativeObj, sum.nativeObj, sqsum.nativeObj);
     }
 
 
@@ -6913,6 +6895,16 @@ public class Imgproc {
     // C++:  void cv::blendLinear(Mat src1, Mat src2, Mat weights1, Mat weights2, Mat& dst)
     //
 
+    /**
+     *
+     *
+     * variant without {@code mask} parameter
+     * @param src1 automatically generated
+     * @param src2 automatically generated
+     * @param weights1 automatically generated
+     * @param weights2 automatically generated
+     * @param dst automatically generated
+     */
     public static void blendLinear(Mat src1, Mat src2, Mat weights1, Mat weights2, Mat dst) {
         blendLinear_0(src1.nativeObj, src2.nativeObj, weights1.nativeObj, weights2.nativeObj, dst.nativeObj);
     }
@@ -7486,6 +7478,7 @@ public class Imgproc {
      * in contours of the next and previous contours at the same hierarchical level, the first child
      * contour and the parent contour, respectively. If for the contour i there are no next, previous,
      * parent, or nested contours, the corresponding elements of hierarchy[i] will be negative.
+     * <b>Note:</b> In Python, hierarchy is nested inside a top level array. Use hierarchy[0][i] to access hierarchical elements of i-th contour.
      * @param mode Contour retrieval mode, see #RetrievalModes
      * @param method Contour approximation method, see #ContourApproximationModes
      * @param offset Optional offset by which every contour point is shifted. This is useful if the
@@ -7519,6 +7512,7 @@ public class Imgproc {
      * in contours of the next and previous contours at the same hierarchical level, the first child
      * contour and the parent contour, respectively. If for the contour i there are no next, previous,
      * parent, or nested contours, the corresponding elements of hierarchy[i] will be negative.
+     * <b>Note:</b> In Python, hierarchy is nested inside a top level array. Use hierarchy[0][i] to access hierarchical elements of i-th contour.
      * @param mode Contour retrieval mode, see #RetrievalModes
      * @param method Contour approximation method, see #ContourApproximationModes
      * contours are extracted from the image ROI and then they should be analyzed in the whole image
@@ -8315,7 +8309,7 @@ public class Imgproc {
     //
 
     /**
-     * Draws a arrow segment pointing from the first point to the second one.
+     * Draws an arrow segment pointing from the first point to the second one.
      *
      * The function cv::arrowedLine draws an arrow between pt1 and pt2 points in the image. See also #line.
      *
@@ -8333,7 +8327,7 @@ public class Imgproc {
     }
 
     /**
-     * Draws a arrow segment pointing from the first point to the second one.
+     * Draws an arrow segment pointing from the first point to the second one.
      *
      * The function cv::arrowedLine draws an arrow between pt1 and pt2 points in the image. See also #line.
      *
@@ -8350,7 +8344,7 @@ public class Imgproc {
     }
 
     /**
-     * Draws a arrow segment pointing from the first point to the second one.
+     * Draws an arrow segment pointing from the first point to the second one.
      *
      * The function cv::arrowedLine draws an arrow between pt1 and pt2 points in the image. See also #line.
      *
@@ -8366,7 +8360,7 @@ public class Imgproc {
     }
 
     /**
-     * Draws a arrow segment pointing from the first point to the second one.
+     * Draws an arrow segment pointing from the first point to the second one.
      *
      * The function cv::arrowedLine draws an arrow between pt1 and pt2 points in the image. See also #line.
      *
@@ -8381,7 +8375,7 @@ public class Imgproc {
     }
 
     /**
-     * Draws a arrow segment pointing from the first point to the second one.
+     * Draws an arrow segment pointing from the first point to the second one.
      *
      * The function cv::arrowedLine draws an arrow between pt1 and pt2 points in the image. See also #line.
      *
@@ -9093,7 +9087,7 @@ public class Imgproc {
      * @param offset Optional contour shift parameter. Shift all the drawn contours by the specified
      * \(\texttt{offset}=(dx,dy)\) .
      * <b>Note:</b> When thickness=#FILLED, the function is designed to handle connected components with holes correctly
-     * even when no hierarchy date is provided. This is done by analyzing all the outlines together
+     * even when no hierarchy data is provided. This is done by analyzing all the outlines together
      * using even-odd rule. This may give incorrect results if you have a joint collection of separately retrieved
      * contours. In order to solve this problem, you need to call #drawContours separately for each sub-group
      * of contours, or iterate over the collection using contourIdx parameter.
@@ -9127,7 +9121,7 @@ public class Imgproc {
      * parameter is only taken into account when there is hierarchy available.
      * \(\texttt{offset}=(dx,dy)\) .
      * <b>Note:</b> When thickness=#FILLED, the function is designed to handle connected components with holes correctly
-     * even when no hierarchy date is provided. This is done by analyzing all the outlines together
+     * even when no hierarchy data is provided. This is done by analyzing all the outlines together
      * using even-odd rule. This may give incorrect results if you have a joint collection of separately retrieved
      * contours. In order to solve this problem, you need to call #drawContours separately for each sub-group
      * of contours, or iterate over the collection using contourIdx parameter.
@@ -9160,7 +9154,7 @@ public class Imgproc {
      * parameter is only taken into account when there is hierarchy available.
      * \(\texttt{offset}=(dx,dy)\) .
      * <b>Note:</b> When thickness=#FILLED, the function is designed to handle connected components with holes correctly
-     * even when no hierarchy date is provided. This is done by analyzing all the outlines together
+     * even when no hierarchy data is provided. This is done by analyzing all the outlines together
      * using even-odd rule. This may give incorrect results if you have a joint collection of separately retrieved
      * contours. In order to solve this problem, you need to call #drawContours separately for each sub-group
      * of contours, or iterate over the collection using contourIdx parameter.
@@ -9192,7 +9186,7 @@ public class Imgproc {
      * parameter is only taken into account when there is hierarchy available.
      * \(\texttt{offset}=(dx,dy)\) .
      * <b>Note:</b> When thickness=#FILLED, the function is designed to handle connected components with holes correctly
-     * even when no hierarchy date is provided. This is done by analyzing all the outlines together
+     * even when no hierarchy data is provided. This is done by analyzing all the outlines together
      * using even-odd rule. This may give incorrect results if you have a joint collection of separately retrieved
      * contours. In order to solve this problem, you need to call #drawContours separately for each sub-group
      * of contours, or iterate over the collection using contourIdx parameter.
@@ -9223,7 +9217,7 @@ public class Imgproc {
      * parameter is only taken into account when there is hierarchy available.
      * \(\texttt{offset}=(dx,dy)\) .
      * <b>Note:</b> When thickness=#FILLED, the function is designed to handle connected components with holes correctly
-     * even when no hierarchy date is provided. This is done by analyzing all the outlines together
+     * even when no hierarchy data is provided. This is done by analyzing all the outlines together
      * using even-odd rule. This may give incorrect results if you have a joint collection of separately retrieved
      * contours. In order to solve this problem, you need to call #drawContours separately for each sub-group
      * of contours, or iterate over the collection using contourIdx parameter.
@@ -9253,7 +9247,7 @@ public class Imgproc {
      * parameter is only taken into account when there is hierarchy available.
      * \(\texttt{offset}=(dx,dy)\) .
      * <b>Note:</b> When thickness=#FILLED, the function is designed to handle connected components with holes correctly
-     * even when no hierarchy date is provided. This is done by analyzing all the outlines together
+     * even when no hierarchy data is provided. This is done by analyzing all the outlines together
      * using even-odd rule. This may give incorrect results if you have a joint collection of separately retrieved
      * contours. In order to solve this problem, you need to call #drawContours separately for each sub-group
      * of contours, or iterate over the collection using contourIdx parameter.
@@ -9777,6 +9771,11 @@ public static Size getTextSize(String text, int fontFace, double fontScale, int 
     // C++:  void cv::warpPolar(Mat src, Mat& dst, Size dsize, Point2f center, double maxRadius, int flags)
     private static native void warpPolar_0(long src_nativeObj, long dst_nativeObj, double dsize_width, double dsize_height, double center_x, double center_y, double maxRadius, int flags);
 
+    // C++:  void cv::integral(Mat src, Mat& sum, Mat& sqsum, Mat& tilted, int sdepth = -1, int sqdepth = -1)
+    private static native void integral3_0(long src_nativeObj, long sum_nativeObj, long sqsum_nativeObj, long tilted_nativeObj, int sdepth, int sqdepth);
+    private static native void integral3_1(long src_nativeObj, long sum_nativeObj, long sqsum_nativeObj, long tilted_nativeObj, int sdepth);
+    private static native void integral3_2(long src_nativeObj, long sum_nativeObj, long sqsum_nativeObj, long tilted_nativeObj);
+
     // C++:  void cv::integral(Mat src, Mat& sum, int sdepth = -1)
     private static native void integral_0(long src_nativeObj, long sum_nativeObj, int sdepth);
     private static native void integral_1(long src_nativeObj, long sum_nativeObj);
@@ -9785,11 +9784,6 @@ public static Size getTextSize(String text, int fontFace, double fontScale, int 
     private static native void integral2_0(long src_nativeObj, long sum_nativeObj, long sqsum_nativeObj, int sdepth, int sqdepth);
     private static native void integral2_1(long src_nativeObj, long sum_nativeObj, long sqsum_nativeObj, int sdepth);
     private static native void integral2_2(long src_nativeObj, long sum_nativeObj, long sqsum_nativeObj);
-
-    // C++:  void cv::integral(Mat src, Mat& sum, Mat& sqsum, Mat& tilted, int sdepth = -1, int sqdepth = -1)
-    private static native void integral3_0(long src_nativeObj, long sum_nativeObj, long sqsum_nativeObj, long tilted_nativeObj, int sdepth, int sqdepth);
-    private static native void integral3_1(long src_nativeObj, long sum_nativeObj, long sqsum_nativeObj, long tilted_nativeObj, int sdepth);
-    private static native void integral3_2(long src_nativeObj, long sum_nativeObj, long sqsum_nativeObj, long tilted_nativeObj);
 
     // C++:  void cv::accumulate(Mat src, Mat& dst, Mat mask = Mat())
     private static native void accumulate_0(long src_nativeObj, long dst_nativeObj, long mask_nativeObj);
